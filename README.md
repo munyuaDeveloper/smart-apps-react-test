@@ -12,23 +12,6 @@ This is a **React.js** application that performs full **CRUD** (Create, Read, Up
 - Form validation for adding and editing users.
 - Optimized UI updates and rendering.
 
-## Table of Contents
-
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Folder Structure](#folder-structure)
-4. [Core Functionality](#core-functionality)
-    - [Fetching Users](#fetching-users)
-    - [Adding a User](#adding-a-user)
-    - [Editing a User](#editing-a-user)
-    - [Deleting a User](#deleting-a-user)
-    - [Search Functionality](#search-functionality)
-5. [Custom Hook: useLocalStorage](#custom-hook-uselocalstorage)
-6. [Optimizations](#optimizations)
-7. [Bonus Features](#bonus-features)
-8. [Tech Stack](#tech-stack)
-
----
 
 ## Installation
 
@@ -39,3 +22,11 @@ Ensure you have **Node.js** and **npm** installed.
    ```bash
    git clone https://github.com/your-username/smart-apps-react-test.git
    cd smart-apps-react-test
+
+   smart-apps-react-test/
+
+2. Run npm install to install the dependencies
+   ``npm install``
+3. Run the Application
+   `` npm run dev``
+
