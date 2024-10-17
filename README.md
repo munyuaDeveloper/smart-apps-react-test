@@ -1,7 +1,8 @@
 # Smart Apps React Test - CRUD Application
 
-![Alt text for the image](./assets/screenshot.png)
+![Alt text for the image](./src/assets/screenshot.png)
 
+![Alt text for the image](./src/assets/screenshot2.png)
 
 This is a **React.js** application that performs full **CRUD** (Create, Read, Update, Delete) operations on a list of users. The app fetches initial data from an external API and allows users to manage this data, with local changes stored in **localStorage** or **Redux**.
 
