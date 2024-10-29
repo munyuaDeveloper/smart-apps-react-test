@@ -1,7 +1,9 @@
+import React from "react";
 import ReactDOM from "react-dom";
 import { FaTimes } from "react-icons/fa";
+import { ModalProp } from "../model/interfaces";
 
-const Modal = ({ isOpen, onClose, children, isEditMode }) => {
+const Modal = ({ isOpen, onClose, children, isEditMode }: ModalProp) => {
   if (!isOpen) return null;
 
   return ReactDOM.createPortal(
@@ -18,7 +20,7 @@ const Modal = ({ isOpen, onClose, children, isEditMode }) => {
         </div>
       </div>
     </div>,
-    document.getElementById("modal-root")
+    document.getElementById("modal-root")!
   );
 };
 

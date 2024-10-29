@@ -1,12 +1,13 @@
-import { useReducer, useEffect, useState } from "react";
+import React, { useReducer, useEffect, useState, FormEvent, ReactEventHandler } from "react";
+import { ActionType, AddUserFormProps, UserInterface } from "../model/interfaces";
 
-const initialFormState = {
+const initialFormState: UserInterface = {
   name: "",
   email: "",
   phone: "",
 };
 
-const formReducer = (state, action) => {
+const formReducer = (state: UserInterface, action: ActionType): UserInterface => {
   switch (action.type) {
     case "SET_FIELD":
       return {
@@ -22,9 +23,10 @@ const formReducer = (state, action) => {
   }
 };
 
-const AddUserForm = ({ addUser, isEditMode, currentUser, handleUpdate }) => {
+const AddUserForm = ({ addUser, isEditMode, currentUser, handleUpdate }: AddUserFormProps) => {
+
   const [formState, dispatch] = useReducer(formReducer, initialFormState);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(initialFormState);
 
   // Update form state when editing
   useEffect(() => {
@@ -35,18 +37,18 @@ const AddUserForm = ({ addUser, isEditMode, currentUser, handleUpdate }) => {
     }
   }, [isEditMode, currentUser]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     dispatch({ type: "SET_FIELD", field: name, value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateForm()) {
       if (isEditMode) {
         handleUpdate(formState);
       } else {
-        addUser({ ...formState, id: Math.random(100) });
+        addUser(formState);
       }
       dispatch({ type: "CLEAR_FORM" });
     }
@@ -54,7 +56,7 @@ const AddUserForm = ({ addUser, isEditMode, currentUser, handleUpdate }) => {
 
   const validateForm = () => {
     const { name, email, phone } = formState;
-    const errors = {};
+    const errors: UserInterface = initialFormState
 
     if (!name) {
       errors.name = "Name is required";

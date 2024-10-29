@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { UserInterface } from "../model/interfaces";
 
-function useLocalStorage(key, initialValue) {
+function useLocalStorage(key: string, initialValue: UserInterface[]) {
   const [storedValue, setStoredValue] = useState(() => {
     const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : initialValue;

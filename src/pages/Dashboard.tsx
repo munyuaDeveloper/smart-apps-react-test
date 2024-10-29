@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserTable from "../components/UserTable";
 import axios from "axios";
 import AddUserForm from "../components/AddUser";
 import useLocalStorage from "../hooks/useLocalStorage";
 import Modal from "../components/Modal";
 import { toast } from "react-toastify";
+import { UserInterface } from "../model/interfaces";
 
 const Dashboard = () => {
   const [users, setUsers] = useLocalStorage("users", []);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState<UserInterface | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Fetch users on component mount
@@ -25,21 +26,21 @@ const Dashboard = () => {
 
 
   // Add new user
-  const addUser = (newUser) => {
-    setUsers([newUser,...users]);
+  const addUser = (newUser: UserInterface) => {
+    setUsers([newUser, ...users]);
     setIsModalOpen(false);
     toast.success('User created successfully')
   };
 
   // Edit user
-  const handleEdit = (user) => {
+  const handleEdit = (user: UserInterface) => {
     setIsEditMode(true);
     setCurrentUser(user);
     setIsModalOpen(true);
   };
 
-  const handleUpdate = (updatedUser) => {
-    const updatedUsers = users.map((user) =>
+  const handleUpdate = (updatedUser: UserInterface) => {
+    const updatedUsers = users.map((user: UserInterface) =>
       user.id === updatedUser.id ? updatedUser : user
     );
     setUsers(updatedUsers);
@@ -48,14 +49,14 @@ const Dashboard = () => {
   };
 
   // Delete user
-  const handleDelete = (userId) => {
-    const updatedUsers = users.filter((user) => user.id !== userId);
+  const handleDelete = (userId: string) => {
+    const updatedUsers = users.filter((user: UserInterface) => user.id !== userId);
     setUsers(updatedUsers);
     toast.success('User deleted successfully')
   };
 
   // Open modal for user creation
-  const handleCreateUser = ()=> {
+  const handleCreateUser = () => {
     setIsModalOpen(true)
     setIsEditMode(false);
   }

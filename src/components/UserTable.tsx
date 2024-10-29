@@ -1,16 +1,19 @@
+import React from "react";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaPencil, FaPlus, FaTrashCan } from "react-icons/fa6";
+import { UserTableProps } from "../model/interfaces";
 
-const UserTable = ({ users, handleEdit, handleDelete, handleCreateUser }) => {
+const UserTable = ({ users, handleEdit, handleDelete, handleCreateUser }: UserTableProps) => {
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const searchRef = useRef("");
+  const searchRef = useRef<HTMLInputElement>(null);
 
   // Handle search input
   const handleSearch = useCallback(() => {
-    setSearchTerm(searchRef.current.value);
+    const value = searchRef.current && searchRef.current.value;
+    setSearchTerm(value!);
   }, []);
 
   // Filter users based on search term
@@ -54,7 +57,7 @@ const UserTable = ({ users, handleEdit, handleDelete, handleCreateUser }) => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user, index) => (
+            {filteredUsers.map((user, index: number) => (
               <tr className="" key={index}>
                 <td className="px-6 py-4 border-b border-gray-300">
                   {user?.name}
@@ -75,7 +78,7 @@ const UserTable = ({ users, handleEdit, handleDelete, handleCreateUser }) => {
                   </button>
                   <button
                     className="px-4 py-2 bg-red-400 text-white rounded-md hover:bg-red-700 flex gap-2 items-center"
-                    onClick={() => handleDelete(user.id)}
+                    onClick={() => handleDelete(user.id!)}
                   >
                     <FaTrashCan />
                     Delete
